@@ -1,0 +1,27 @@
+/*
+Make sure you start watcher for scss.
+To start watcher:
+npm run watcher
+*/
+.statistics {
+	strong{
+		font-size: 1.2rem;
+	}
+	.answers {
+		padding: 10px;
+		border-radius: 5px;
+		&.answered {
+			border: solid 1px $success;
+			color: $success;
+		}
+		&.has-best-answer {
+			border: solid 1px $success;
+			background: $success;
+			color: $white;
+		}
+		&.unanswered {
+			background: $danger;
+			color: $white;
+		}
+	}
+}

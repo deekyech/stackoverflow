@@ -10882,3 +10882,34 @@ a.text-dark:focus {
   }
 }
 
+/*
+Make sure you start watcher for scss.
+To start watcher:
+npm run watcher
+*/
+
+.statistics strong {
+  font-size: 1.2rem;
+}
+
+.statistics .answers {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.statistics .answers.answered {
+  border: solid 1px #38c172;
+  color: #38c172;
+}
+
+.statistics .answers.has-best-answer {
+  border: solid 1px #38c172;
+  background: #38c172;
+  color: #fff;
+}
+
+.statistics .answers.unanswered {
+  background: #e3342f;
+  color: #fff;
+}
+
