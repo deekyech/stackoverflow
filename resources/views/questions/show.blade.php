@@ -9,7 +9,7 @@
 					    <h1>{{ $question->title }}</h1>
 				    </div>
 				    <div class="card-body">
-					    {{ $question->body }}
+					    {!! $question->body !!}
 				    </div>
 			    </div>
 		    </div>
