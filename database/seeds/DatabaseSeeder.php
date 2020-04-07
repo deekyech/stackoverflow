@@ -15,9 +15,19 @@ class DatabaseSeeder extends Seeder
 	    factory(\App\User::class, 5)
 		    ->create()
 		    ->each(function ($user) {
-		    	for ($i = 0; $i<=rand(5, 10); $i++) {
+		    	//Create() requires an array
+		    	/*for ($i = 0; $i<=rand(5, 10); $i++) {
 				    $user->questions()->create(factory(\App\Question::class)->make()->toArray());
-			    }
+			    }*/
+			   
+		    	//saveMany() requires model object.
+			    $user
+				    ->questions()
+				    ->saveMany(
+				    	factory(\App\Question::class, rand(2, 5))->make()
+				    )->each(function ($question) {
+						$question->answers()->saveMany(factory(\App\Answer::class, rand(2, 7))->make());
+				    });
 		    });
     }
 }
