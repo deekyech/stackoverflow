@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Questions\CreateQuestionRequest;
 use App\Question;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    /**
+	
+	public function __construct()
+	{
+		//There is an except() method too.
+		//This could be done directly in the route too in web.php
+		$this->middleware(['auth'])->only(['create', 'store']);
+	}
+	
+	/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -24,7 +33,7 @@ class QuestionsController extends Controller
 	     * Hence this makes a lot of difference in performance.
 	     * You can check the queries used by installing the laravel debugbar
 	     * To install use command:
-	     * composer require barryvdh/laravel-debugbar
+	     * composer require barryvdh/laravel-debugbar --dev
 	     */
     	$questions = Question::with('owner')->latest()->paginate(10);
         return view('questions.index', compact('questions'));
@@ -37,7 +46,9 @@ class QuestionsController extends Controller
      */
     public function create()
     {
-        //
+    	//To disable debugbar for create
+    	app('debugbar')->disable();
+        return view('questions.create');
     }
 
     /**
@@ -46,9 +57,14 @@ class QuestionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateQuestionRequest $request)
     {
-        //
+        auth()->user()->questions()->create([
+        	'title'     =>      $request->title,
+	        'body'      =>      $request->body
+        ]);
+        session()->flash("success", "Question has been posted successfully!");
+        return redirect(route('questions.index'));
     }
 
     /**

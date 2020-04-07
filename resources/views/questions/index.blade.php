@@ -4,7 +4,10 @@
     <div class="container">
 	    <div class="row">
 		    <div class="col-md-12">
-			   <div class="card">
+			    <div class="d-flex justify-content-end mb-3">
+				    <a href="{{ route('questions.create') }}" class="btn btn-outline-primary">Ask a question!</a>
+			    </div>
+			    <div class="card">
 				   <div class="card-header">All Questions</div>
 				   @foreach($questions as $question)
 					   <div class="card-body">
@@ -29,7 +32,8 @@
 									   Asked By: <a href="#">{{ $question->owner->name }}</a>
 									   <span class="text-muted">{{ $question->created_date }}</span>
 								   </p>
-								   <p>{{ Str::limit($question->body, 250) }}</p>
+								   {{-- In blade {!!  !!} tags denote that it uses html_escape_sequence, this means that the html will be rendered. --}}
+								   <p>{!! Str::limit($question->body, 250) !!}</p>
 							   </div>
 						   </div>
 					   </div>

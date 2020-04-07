@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\BaseModel;
 use Illuminate\Support\Str;
 
 class Question extends BaseModel
