@@ -29,8 +29,8 @@
 							   <div class="media-body">
 								   <div class="d-flex justify-content-between">
 									   <h4><a href="{{ $question->url }}">{{ $question->title }}</a></h4>
-									   <div>
-										   <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+									   <div class="d-flex flex-row">
+										   <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-primary mr-3">Edit</a>
 										   <form action="{{ route('questions.destroy', $question->id) }}" method="POST">
 											   @csrf
 											   @method('DELETE')

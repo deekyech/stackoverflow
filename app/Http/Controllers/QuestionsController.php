@@ -76,7 +76,9 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+    	//increment() method will increment the view_count value and also persist it in the database.
+    	$question->increment('views_count');
+        return view('questions.show', compact('question'));
     }
 
     /**

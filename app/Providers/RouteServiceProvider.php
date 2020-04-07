@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Question;
+use function foo\func;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -30,8 +32,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        //Here, we bind the model of the show(Question question method).
+	    //Hence we manually have to return the question model with the respective slug.
+		Route::bind('slug', function ($slug) {
+			return Question::where('slug', $slug)->firstOrFail();
+		});
         parent::boot();
     }
 

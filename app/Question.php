@@ -43,7 +43,7 @@ class Question extends BaseModel
 	 * If it doesn't find an accessor, it will throw an exception variable not found.
 	 */
 	public function getUrlAttribute() {
-		return "questions/{$this->id}";
+		return "questions/{$this->slug}";
 	}
 	
 	public function getCreatedDateAttribute() {
