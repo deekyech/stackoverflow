@@ -14,7 +14,6 @@
 						    <div class="form-group">
 							    <label for="title">Title</label>
 							    <input type="text" name="title" id="title" placeholder="Enter Title!" class="form-control {{ $errors->has('title')? 'is-invalid': ''}}" value="{{ old('title') }}">
-							    
 							    @error('title')
 							        <div class="text-danger">Title already used.</div>
 							    @enderror

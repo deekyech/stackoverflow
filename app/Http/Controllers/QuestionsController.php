@@ -12,8 +12,9 @@ class QuestionsController extends Controller
 	public function __construct()
 	{
 		//There is an except() method too.
+		//There is an only() method too
 		//This could be done directly in the route too in web.php
-		$this->middleware(['auth'])->only(['create', 'store']);
+		$this->middleware(['auth'])->except(['index', 'show']);
 	}
 	
 	/**
@@ -86,7 +87,7 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -98,7 +99,12 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->update([
+        	'title'     =>      $request->title,
+	        'body'      =>      $request->body
+        ]);
+	    session()->flash("success", "Question has been modified successfully!");
+	    return redirect(route('questions.index'));
     }
 
     /**
