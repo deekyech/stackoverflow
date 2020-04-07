@@ -29,7 +29,14 @@
 							   <div class="media-body">
 								   <div class="d-flex justify-content-between">
 									   <h4><a href="{{ $question->url }}">{{ $question->title }}</a></h4>
-									   <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+									   <div>
+										   <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+										   <form action="{{ route('questions.destroy', $question->id) }}" method="POST">
+											   @csrf
+											   @method('DELETE')
+											   <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+										   </form>
+									   </div>
 								   </div>
 								   <p>
 									   Asked By: <a href="#">{{ $question->owner->name }}</a>
