@@ -26,3 +26,5 @@ Route::resource('questions', 'QuestionsController')->except('show');
 //We exempted show method from questions resource routes so that we can use slug for show method instead of id.
 //To achieve model-resource binding with slug instead of id, we need to modify the boot() method of the file RouteServiceProvider.php
 Route::get('questions/{slug}', 'QuestionsController@show')->name('questions.show');
+
+Route::resource('questions.answers', 'AnswersController')->except(['index', 'create', 'show']);

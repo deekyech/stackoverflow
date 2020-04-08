@@ -51,5 +51,14 @@
 	    </div>
 	    
 	    @include('answers._index')
+	    @include('answers._create')
     </div>
+@endsection
+
+@section('page-styles')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css" integrity="sha256-yebzx8LjuetQ3l4hhQ5eNaOxVLgqaY1y8JcrXuJrAOg=" crossorigin="anonymous" />
+@endsection
+
+@section('page-scripts')
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.js" integrity="sha256-2D+ZJyeHHlEMmtuQTVtXt1gl0zRLKr51OCxyFfmFIBM=" crossorigin="anonymous"></script>
 @endsection
