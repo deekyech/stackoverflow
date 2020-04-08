@@ -8,8 +8,15 @@ class Answer extends BaseModel
 	public function question() {
 		return $this->belongsTo(Question::class);
 	}
-	public function user() {
-		return $this->belongsTo(User::class);
+	public function author() {
+		return $this->belongsTo(User::class, 'user_id');
+	}
+	
+	public function getCreatedDateAttribute() {
+		//Since function call should not be done in the view, we created an accessor
+		//For dates, there is a php package called carbon package.
+		//The diffForHumans method returns date in format like (1 day ago), (10 minutes ago).
+		return $this->created_at->diffForHumans();
 	}
 	
 	//This concept is called Eloquent Events.

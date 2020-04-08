@@ -66,6 +66,6 @@ class Question extends BaseModel
 	}
 	
 	public function answers() {
-		return $this->hasMany(Question::class);
+		return $this->hasMany(Answer::class);
 	}
 }

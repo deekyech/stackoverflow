@@ -34,8 +34,18 @@ class RouteServiceProvider extends ServiceProvider
     {
         //Here, we bind the model of the show(Question question method).
 	    //Hence we manually have to return the question model with the respective slug.
+	    
+	    /*
+	     * Question::with('answers.author') is used for eager loading.
+	     * The question object received in the controller class will include
+	     * all answers as well as their authors.
+	     * Hence while displaying answers laravel wont have to fire query to
+	     * fetch each answer one by one.
+	     * */
 		Route::bind('slug', function ($slug) {
-			return Question::where('slug', $slug)->firstOrFail();
+			return Question::with('answers.author')
+				->where('slug', $slug)
+				->firstOrFail();
 		});
         parent::boot();
     }
