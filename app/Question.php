@@ -68,4 +68,61 @@ class Question extends BaseModel
 	public function answers() {
 		return $this->hasMany(Answer::class);
 	}
+	
+	public function markBestAnswer(Answer $answer) {
+		$this->best_answer_id = $answer->id;
+		$this->save();
+	}
+	
+	public function favorites() {
+		return $this->belongsToMany(User::class)->withTimestamps();
+	}
+	
+	public function getFavoritesCountAttribute() {
+		return $this->favorites->count();
+	}
+	
+	public function getIsFavoriteAttribute() {
+		return $this->favorites()->where(['user_id'=>auth()->id()])->count() > 0;
+	}
+	
+	
+	public function votes()
+	{
+		return $this->morphToMany(User::class, 'vote')->withTimestamps();
+	}
+	
+	/*
+	 *
+	 * vote():
+	 * Performs vote operation
+	 * The attach method binds vote with question_id, user_id,
+	 * question model is inserted automatically by laravel in vote_type
+	 * field.
+	 */
+	public function vote(int $vote)
+	{
+		$this->votes()->attach(auth()->id(), ['vote' => $vote]);
+		if ($vote < 0) {
+			$this->decrement('votes_count');
+		} else {
+			$this->increment('votes_count');
+		}
+	}
+	
+	/*
+	 * The updateExistingPivot method is like attach method which is
+	 * used for update operations on polymorphic relationships.
+	 */
+	public function updateVote($vote)
+	{
+		$this->votes()->updateExistingPivot(auth()->id(), ['vote' => $vote]);
+		if ($vote < 0) {
+			$this->decrement('votes_count');
+			$this->decrement('votes_count');
+		} else {
+			$this->increment('votes_count');
+			$this->increment('votes_count');
+		}
+	}
 }

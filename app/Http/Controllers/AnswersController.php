@@ -55,15 +55,25 @@ class AnswersController extends Controller
 	    session()->flash('success', 'Your answer was updated successfully.');
 	    return redirect($question->url);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Answer $answer)
+	
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Answer $answer
+	 * @return \Illuminate\Http\Response
+	 * @throws \Illuminate\Auth\Access\AuthorizationException
+	 */
+    public function destroy(Question $question, Answer $answer)
     {
-        //
+        $this->authorize('delete', $answer);
+        $answer->delete();
+        session()->flash('success', 'Your answer has been deleted.');
+        return redirect()->back();
+    }
+    
+    public function bestAnswer(Answer $answer) {
+//    	dd($answer);
+    	$answer->question->markBestAnswer($answer);
+    	return redirect()->back();
     }
 }
