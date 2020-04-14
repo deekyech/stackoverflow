@@ -43,3 +43,5 @@ Route::post('questions/{question}/vote/{vote}', 'VotesController@voteQuestion')
 	
 Route::post('answers/{answer}/vote/{vote}', 'VotesController@voteAnswer')
 	->name('answers.vote');
+
+Route::resource('blog', 'PostsController');

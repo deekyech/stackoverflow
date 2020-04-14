@@ -46,6 +46,10 @@ class User extends Authenticatable
     	return $this->hasMany(Answer::class);
     }
     
+    public function posts() {
+    	return $this->hasMany(Post::class);
+    }
+    
     public function getAvatarAttribute() {
     	$size = 40;
     	$name = $this->name;

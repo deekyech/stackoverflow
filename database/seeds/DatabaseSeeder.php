@@ -28,6 +28,12 @@ class DatabaseSeeder extends Seeder
 				    )->each(function ($question) {
 						$question->answers()->saveMany(factory(\App\Answer::class, rand(2, 7))->make());
 				    });
+			    
+			    $user
+				    ->posts()
+				    ->saveMany(
+				    	factory(\App\Post::class, rand(2, 5))->make()
+				    );
 		    });
     }
 }
